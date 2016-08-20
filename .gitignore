@@ -37,6 +37,7 @@ jspm_packages
 # Optional REPL history
 .node_repl_history
 
-# Sublime files
+# IDE files
 *.sublime-project
 *.sublime-workspace
+.vscode
