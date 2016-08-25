@@ -5,15 +5,15 @@ var express = require('express')
 var router = express.Router()
 module.exports = router
 
-router.get('/admin/rooms', function (req, res) {
+router.get('/rooms', function (req, res) {
   res.render('rooms', { title: 'Admin Rooms', rooms: rooms })
 })
 
-router.get('/admin/rooms/add', function (req, res) {
+router.get('/rooms/add', function (req, res) {
   res.render('add')
 })
 
-router.post('/admin/rooms/add', function (req, res) {
+router.post('/rooms/add', function (req, res) {
   var room = {
     name: req.body.name,
     id: uuid.v4()
@@ -21,18 +21,18 @@ router.post('/admin/rooms/add', function (req, res) {
 
   rooms.push(room)
 
-  res.redirect('/admin/rooms')
+  res.redirect('/rooms')
 })
 
-router.get('/admin/rooms/delete/:id', function (req, res) {
+router.get('/rooms/delete/:id', function (req, res) {
   var roomId = req.params.id
 
   rooms = _.find(rooms, r => r.id !== roomId)
 
-  res.redirect('/admin/rooms')
+  res.redirect('rooms')
 })
 
-router.get('/admin/rooms/edit/:id', function (req, res) {
+router.get('/rooms/edit/:id', function (req, res) {
   var roomId = req.params.id
 
   var room = _.find(rooms, r => r.id === roomId)
@@ -43,7 +43,7 @@ router.get('/admin/rooms/edit/:id', function (req, res) {
   res.render('edit', { room })
 })
 
-router.post('/admin/rooms/edit/:id', function (req, res) {
+router.post('/rooms/edit/:id', function (req, res) {
   var roomId = req.params.id
 
   var room = _.find(rooms, r => r.id === roomId)
@@ -53,5 +53,5 @@ router.post('/admin/rooms/edit/:id', function (req, res) {
 
   room.name = req.body.name
 
-  res.redirect('/admin/rooms')
+  res.redirect('/rooms')
 })
