@@ -8,11 +8,12 @@ block content
             tr
                 th
                 th Name
-                th Id
+                th
         tbody
             each room in rooms
                 tr
                     td: a(href='/admin/rooms/delete/#{room.id}')
                         span.glyphicon.glyphicon-remove
                     td= room.name
-                    td= room.id
+                    td: a(href='/admin/rooms/edit/#{room.id}')
+                        span.glyphicon.glyphicon-pencil

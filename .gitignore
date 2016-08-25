@@ -29,6 +29,7 @@ build/Release
 
 # Typings generated files
 typings
+typings.json
 
 # Dependency directories
 node_modules
