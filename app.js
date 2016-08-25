@@ -5,6 +5,7 @@ var admin = require('./admin')
 
 app.set('view engine', 'jade')
 app.set('views', './views')
+
 app.use(admin)
 app.use(express.static('public'))
 app.use(express.static('node_modules/bootstrap/dist'))
