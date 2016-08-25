@@ -46,6 +46,9 @@ app.get('/admin/rooms/edit/:id', function (req, res) {
   var roomId = req.params.id
 
   var room = _.find(rooms, r => r.id === roomId)
+  if (!room) {
+    res.sendStatus(404)
+  }
 
   res.render('edit', { room })
 })
@@ -54,6 +57,10 @@ app.post('/admin/rooms/edit/:id', function (req, res) {
   var roomId = req.params.id
 
   var room = _.find(rooms, r => r.id === roomId)
+  if (!room) {
+    res.sendStatus(404)
+  }
+
   room.name = req.body.name
 
   res.redirect('/admin/rooms')
