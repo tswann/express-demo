@@ -40,7 +40,8 @@ $(function () {
     $.ajax({
       type: 'POST',
       url: '/api/rooms/' + roomId + '/messages',
-      data: message,
+      data: JSON.stringify(message),
+      contentType: 'application/json',
       success: function () {
         $('#message').val('')
         getMessages()
@@ -57,7 +58,7 @@ $(function () {
     $.ajax({
       type: 'DELETE',
       url: '/api/rooms/' + roomId + '/messages',
-      sucess: function () {
+      success: function () {
         $('#messages').val('')
       }
     })
