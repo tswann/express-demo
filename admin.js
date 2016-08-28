@@ -9,20 +9,20 @@ router.get('/rooms', function (req, res) {
   res.render('rooms', { title: 'Admin Rooms', rooms: rooms })
 })
 
-router.get('/rooms/add', function (req, res) {
-  res.render('add')
-})
+router.route('/rooms/add')
+  .get(function (req, res) {
+    res.render('add')
+  })
+  .post(function (req, res) {
+    var room = {
+      name: req.body.name,
+      id: uuid.v4()
+    }
 
-router.post('/rooms/add', function (req, res) {
-  var room = {
-    name: req.body.name,
-    id: uuid.v4()
-  }
+    rooms.push(room)
 
-  rooms.push(room)
-
-  res.redirect(req.baseUrl + '/rooms')
-})
+    res.redirect(req.baseUrl + '/rooms')
+  })
 
 router.get('/rooms/delete/:id', function (req, res) {
   var roomId = req.params.id
@@ -32,26 +32,27 @@ router.get('/rooms/delete/:id', function (req, res) {
   res.redirect(req.baseUrl + '/rooms')
 })
 
-router.get('/rooms/edit/:id', function (req, res) {
-  var roomId = req.params.id
+router.route('/rooms/edit/:id')
+  .get(function (req, res) {
+    var roomId = req.params.id
 
-  var room = _.find(rooms, r => r.id === roomId)
-  if (!room) {
-    res.sendStatus(404)
-  }
+    var room = _.find(rooms, r => r.id === roomId)
+    if (!room) {
+      res.sendStatus(404)
+    }
 
-  res.render('edit', { room })
-})
+    res.render('edit', { room })
+  })
 
-router.post('/rooms/edit/:id', function (req, res) {
-  var roomId = req.params.id
+  .post(function (req, res) {
+    var roomId = req.params.id
 
-  var room = _.find(rooms, r => r.id === roomId)
-  if (!room) {
-    res.sendStatus(404)
-  }
+    var room = _.find(rooms, r => r.id === roomId)
+    if (!room) {
+      res.sendStatus(404)
+    }
 
-  room.name = req.body.name
+    room.name = req.body.name
 
-  res.redirect(req.baseUrl + '/rooms')
-})
+    res.redirect(req.baseUrl + '/rooms')
+  })
