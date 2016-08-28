@@ -6,15 +6,15 @@ var admin = require('./admin')
 app.set('view engine', 'jade')
 app.set('views', './views')
 
-app.use(bodyParser.urlencoded({ extended: true }))
-app.use(bodyParser.json())
-
-app.use('/admin', admin)
+app.use('/admin', bodyParser.urlencoded({ extended: true }))
+app.use('/api', bodyParser.json())
 app.use(express.static('public'))
 app.use(express.static('node_modules/bootstrap/dist'))
+app.use(express.static('node_modules/jquery/dist'))
+app.use('/admin', admin)
 
 app.get('/', function (req, res) {
-  res.render('index', { title: 'Home' })
+  res.render('home', { title: 'Home' })
 })
 
 app.listen(3000, function () {
