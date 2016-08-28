@@ -7,7 +7,7 @@ var api = require('./api')
 app.set('view engine', 'jade')
 app.set('views', './views')
 
-app.use('/admin', bodyParser.urlencoded({ extended: true }))
+app.use(bodyParser.urlencoded({ extended: true }))
 app.use(express.static('public'))
 app.use(express.static('node_modules/bootstrap/dist'))
 app.use(express.static('node_modules/jquery/dist'))
